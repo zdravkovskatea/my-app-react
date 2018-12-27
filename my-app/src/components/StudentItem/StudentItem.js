@@ -13,16 +13,16 @@ class StudentItem extends Component {
             <div className="card" style={{width: "30rem"}} key={this.props.student.indeks}>
                 <div className="card-header bg-info ">
                     <div className="text-white">Student
-                        <div onClick={() => this.props.onDelete(this.props.student.indeks)}
+                        <div onClick={() => this.props.onDelete(this.props.student.id)}
                              className="btn btn-warning m-1"
                              style={{cursor: "pointer", color: "black", float: "right"}}
                         >Delete</div>
-                        <div onClick={() => this.props.onShowDetails(this.props.student.indeks)}
+                        <div onClick={() => this.props.handleAction(this.props.student, false)}
                              className="btn btn-secondary m-1"
                              style={{cursor: "pointer", color: "white", float: "right"}}
                         >Details</div>
 
-                        <div onClick={() => this.props.handleUpdate(this.props.student)}
+                        <div onClick={() => this.props.handleAction(this.props.student, true)}
                             className="btn btn-primary m-1" style={{float: "right", cursor: "pointer"}}>Update
 
 

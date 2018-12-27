@@ -18,9 +18,16 @@ class App extends Component {
         super(props);
         this.state = {
             student: null,
-            list: listStudents()
+            list: listStudents(),
+            isUpdate: false
         };
     }
+
+    onDelete = (id) => {
+        const newList = this.state.list.filter(s => (s.id !== id));
+        console.log(newList);
+        this.setState({list: newList, student: null});
+    };
 
     onHandleChange = (property) => (event) => {
 
@@ -30,7 +37,8 @@ class App extends Component {
         const updatedStudent = {...this.state.student, ...newProperty};
         console.log(newProperty);
         this.setState({
-            student: updatedStudent
+            student: updatedStudent,
+            isUpdate: false,
         });
 
         // this.setState({
@@ -47,9 +55,9 @@ class App extends Component {
         // }));
     };
 
-    handleUpdate = (student) => {
-        console.log({student});
-        this.setState({student});
+    handleAction = (student, action) => {
+        console.log('New Action!');
+        this.setState({student, isUpdate: action});
 
     };
 
@@ -60,7 +68,7 @@ class App extends Component {
         // const updatedStudent = this.state.list.filter(s => s.id === student.id).map(s => s=student);
 
         const newList = this.state.list.map(s => {if(s.id === student.id){ return student} return s});
-        this.setState({list: newList});
+        this.setState({list: newList, student: null});
     };
 
     componentDidUpdate() {
@@ -76,20 +84,21 @@ class App extends Component {
                     <div className="col-5">
                         <StudentsList
                             students={this.state.list}
-                            onDelete={this.handleDelete}
+                            onDelete={this.onDelete}
                             onShowDetails={this.handleShowDetails}
                             onClickEdit={this.handleEditClick}
-                            handleUpdate={this.handleUpdate}
+                            handleAction={this.handleAction}
                             onUpdateCliked={this.handleUpdateClicked}
+
                         />
                     </div>
                     {console.log(this.state.student)}
                     {this.state.student != null &&
                     <div className="col-6">
                         <EditStudentDetails
-                            onHandleChange={this.onHandleChange}
                             student={this.state.student}
                             handleUpdateSubmit={this.handleUpdateSubmit}
+                            isUpdate={this.state.isUpdate}
                         />
                     </div>
 

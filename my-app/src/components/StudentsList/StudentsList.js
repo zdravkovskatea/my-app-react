@@ -16,7 +16,8 @@ class StudentsList extends Component {
                 {students.map(student => (
                         <StudentItem
                             student={student}
-                            handleUpdate = {this.props.handleUpdate}
+                            handleAction = {this.props.handleAction}
+                            isUpdate = {this.props.isUpdate}
                             onDelete={this.props.onDelete}
                             onShowDetails={this.props.onShowDetails}
                         />
